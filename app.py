@@ -30,17 +30,16 @@ def main():
     # Display chat history
     for interaction in chat_history:
         if interaction["inputs"]["question"]:
-            with st.container():
-                st.text_area("User Input", value=interaction["inputs"]["question"], height=100)
+            with st.chat_message("user"):
+                st.write(interaction["inputs"]["question"])
         if interaction["outputs"]["answer"]:
-            with st.container():
-                st.text_area("Bot Response", value=interaction["outputs"]["answer"], height=100)
+            with st.chat_message("assistant"):
+                st.write(interaction["outputs"]["answer"])
 
     # Display user input box at the bottom of the screen
-    user_input = st.text_input("User Input", key="user_input")
-    submit_button = st.button("Submit", key="submit")
+    user_input = st.chat_input("Say something")
 
-    if submit_button:
+    if user_input:
         # Add user input to chat history
         chat_history.append({"inputs": {"question": user_input}, "outputs": {"answer": ""}})
 
@@ -75,11 +74,6 @@ def main():
             # Update session state
             st.session_state.chat_history = chat_history
 
-            # Update display to show user and bot messages
-            with st.container():
-                st.text_area("User Input", value=user_input, height=100)
-            with st.container():
-                st.text_area("Bot Response", value=bot_response, height=100)
         except urllib.error.HTTPError as error:
             st.error(f"The request failed with status code: {error.code}")
             st.text(error.read().decode("utf8", 'ignore'))
