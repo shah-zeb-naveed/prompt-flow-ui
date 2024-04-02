@@ -4,6 +4,11 @@ This repository contains an implementation of a user interface (UI) for Azure Ma
 
 This was primarily developed for Microsoft's "Chat with Wiki" demo but can be adapted as needed based on the input/output schema of your Prompt Flow implementation.
 
+# Screenshot:
+
+![image](https://github.com/shah-zeb-naveed/prompt-flow-ui/assets/44922205/077af73b-a505-48f7-beeb-2b968c825b6f)
+
+
 # Instructions:
 1. Clone the repository: `git clone https://github.com/shah-zeb-naveed/prompt-flow-ui`
 2. Install streamlit python package `pip install streamlit`.
