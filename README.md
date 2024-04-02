@@ -1,6 +1,8 @@
 # prompt-flow-ui
 
-This repository contains an implementation of a chat interface for Azure Machine Learning Prompt Flow deployments. The chat interface is developed using Streamlit.
+This repository contains an implementation of a user interface (UI) for Azure Machine Learning Prompt Flow deployments. The chat interface is developed using Streamlit.
+
+This was primarily developed for Microsoft's "Chat with Wiki" demo but can be adapted as needed based on the input/output schema of your Prompt Flow implementation.
 
 # Instructions:
 1. Clone the repository: `git clone https://github.com/shah-zeb-naveed/prompt-flow-ui`
