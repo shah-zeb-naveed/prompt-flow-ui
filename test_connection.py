@@ -5,12 +5,14 @@ import ssl
 
 from dotenv import load_dotenv
 load_dotenv()
-os.environ['https_proxy'] = ''
-os.environ['http_proxy'] = ''
-os.environ['no_proxy'] = ''
-os.environ['HTTPS_PROXY'] = ''
-os.environ['HTTP_PROXY'] = ''
-os.environ['NO_PROXY'] = ''
+
+# for connecting off-proxy
+# os.environ['https_proxy'] = ''
+# os.environ['http_proxy'] = ''
+# os.environ['no_proxy'] = ''
+# os.environ['HTTPS_PROXY'] = ''
+# os.environ['HTTP_PROXY'] = ''
+# os.environ['NO_PROXY'] = ''
 
 def allowSelfSignedHttps(allowed):
     # bypass the server certificate verification on client side
@@ -24,7 +26,8 @@ allowSelfSignedHttps(True) # this line is needed if you use self-signed certific
 # depending on the format your endpoint expects.
 # More information can be found here:
 # https://docs.microsoft.com/azure/machine-learning/how-to-deploy-advanced-entry-script
-data = {"chat_history": [{"inputs": {"question": "Who is Albert Einstein?"}, "outputs": {"answer": "Albert Einstein was a German-born theoretical physicist who developed the theory of relativity, one of the two pillars of modern physics (alongside quantum mechanics). His famous equation E=mc^2 has been called 'the world's most famous equation'."}}], "question": "When did he die?"}
+data = {"chat_history": [{"inputs": {"question": "Who is Albert Einstein?"}, "outputs": {"answer": "Albert Einstein was a sicentist.'."}}], "question": "summarize the conversatio above?"}
+data = {"chat_history": [{"inputs": {"question": "Who is Albert Einstein?"}, "outputs": {"answer": "Albert Einstein was a sicentist.'."}}], "question": "summarize the conversatio above?"}
 
 body = str.encode(json.dumps(data))
 

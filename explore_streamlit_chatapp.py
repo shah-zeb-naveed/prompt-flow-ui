@@ -38,6 +38,7 @@ if "messages" not in st.session_state:
 
 # Display chat messages from history on app rerun
 for message in st.session_state.messages:
+    print('Rendering all history...')
     with st.chat_message(message["role"]):
         st.markdown(message["content"]) # st.write() also works fine!
 

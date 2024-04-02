@@ -25,10 +25,13 @@ def main():
     allowSelfSignedHttps(True)  # this line is needed if you use a self-signed certificate in your scoring service.
 
     # Initialize chat history
-    chat_history = st.session_state.get("chat_history", [])
+    if "chat_history" not in st.session_state:
+        st.session_state.chat_history = []
+
+    data = {"chat_history": [], "question": "summarize the conversatio above?"}
 
     # Display chat history
-    for interaction in chat_history:
+    for interaction in st.session_state.chat_history:
         if interaction["inputs"]["question"]:
             with st.chat_message("user"):
                 st.write(interaction["inputs"]["question"])
@@ -36,27 +39,23 @@ def main():
             with st.chat_message("assistant"):
                 st.write(interaction["outputs"]["answer"])
 
-    # Display user input box at the bottom of the screen
-    user_input = st.chat_input("Say something")
 
-    if user_input:
-        # Add user input to chat history
-        chat_history.append({"inputs": {"question": user_input}, "outputs": {"answer": ""}})
+    # React to user input
+    if user_input := st.chat_input("Ask me anything..."):
 
-        # Define data
-        data = {"chat_history": chat_history}
+        # Display user message in chat message container
+        st.chat_message("user").markdown(user_input)
+        
 
+        # Query API
+        data = {"chat_history": st.session_state.chat_history, 'question' : user_input}
         body = json.dumps(data).encode('utf-8')
-
         url = 'https://shahml-hhrub.eastus.inference.ml.azure.com/score'
-        api_key = AZURE_KEY
-
-        # Set up request headers
         headers = {
             'Content-Type': 'application/json',
-            'Authorization': f'Bearer {api_key}',
-            'azureml-model-deployment': 'shahml-hhrub-1' }
-
+            'Authorization': f'Bearer {AZURE_KEY}',
+            'azureml-model-deployment': 'shahml-hhrub-1'
+        }
         req = urllib.request.Request(url, body, headers)
 
         try:
@@ -68,11 +67,18 @@ def main():
             # Extract bot response from the API response
             bot_response = response_data['answer']
 
-            # Add bot response to chat history
-            chat_history[-1]["outputs"]["answer"] = bot_response
+            # # Add bot response to chat history
+            # chat_history[-1]["outputs"]["answer"] = bot_response
 
-            # Update session state
-            st.session_state.chat_history = chat_history
+            # # Update session state
+            # st.session_state.chat_history = chat_history
+
+            # Add user input to chat history
+            st.session_state.chat_history.append({"inputs": {"question": user_input}, "outputs": {"answer": bot_response}})
+
+            # render
+            with st.chat_message("assistant"):
+                st.markdown(bot_response) 
 
         except urllib.error.HTTPError as error:
             st.error(f"The request failed with status code: {error.code}")
