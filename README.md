@@ -1,5 +1,13 @@
 # prompt-flow-ui
 
+PROMO: Get 40% OFF Premium CodeCrafters using https://app.codecrafters.io/join?via=shah-zeb-naveed
+
+During my 5 years of data science experience at General Motors, Royal Bank of Canada and TELUS, I've successfully delivered multi-million dollar data science and automation projects at scale. I have strong knowledge of machine learning, statistics, A/B testing, optimization, time series analysis and distributed computing and I am highly proficient in Python, SQL, dashboarding tools, MLOps and cloud platforms (Azure, GCP certified).
+
+Before making a career change to Data Science, I worked for 16 months in Supply Chain at Unilever and P&G. 
+
+Through this platform, I am offering resume reviews, mock interviews (technical, coding, data, system design, project critique, HR), career change strategy (since I did one myself), code reviews (styling, standards, structuring repos, best software practices), and general consultations on data science, machine learning and deploying solutions at scale.
+
 This repository contains an implementation of a user interface (UI) for Azure Machine Learning Prompt Flow deployments. The chat interface is developed using Streamlit.
 
 This was primarily developed for Microsoft's "Chat with Wiki" demo but can be adapted as needed based on the input/output schema of your Prompt Flow implementation.
